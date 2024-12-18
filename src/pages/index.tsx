@@ -13,6 +13,7 @@ import SeoText from "@/components/seo-text";
 import Subscriber from "@/components/subscriber";
 import useDeviceInfo, { DeviceInfo } from "@/hooks/useDeviceInfo";
 import minVersionCheck from "@/utils/minVersionCheck";
+import magicBell from "@/services/magicBell";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -146,6 +147,10 @@ export default function Home() {
     }
   }, [state.status, info?.subscriptionState]);
 
+  const sendHello = async () => {
+    magicBell.sendNotification('hugs');
+  };
+
   return (
     <>
       <header
@@ -185,13 +190,14 @@ export default function Home() {
           <div className="h-full max-w-screen-md mx-auto">
             <ContentWrapper message={""}>{actions(state)}</ContentWrapper>
             {result(state)}
-            <Links />
-            <SeoText />
-            <Disclaimer />
           </div>
         )}
       </main>
       <Footer open={footerOpen} setOpen={setFooterOpen} />
+
+      <div>
+        <button onClick={sendHello}>Привет!</button>
+      </div>
     </>
   );
 }

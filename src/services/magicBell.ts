@@ -14,6 +14,7 @@ export type NotificationType =
   | "welcome"
   | "hn_top_story"
   | "hn_top_new"
+  | "hugs"
   | "hn_random"
 
 class MagicBell {
