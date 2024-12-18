@@ -63,17 +63,11 @@ export default function Subscriber({
   }
 
   return (
-    <>
-      <Button
+    <div
+    className="fixed bottom-4 right-4 z-50"
         onClick={handleSubscribe}
-        text="Subscribe"
-        classname="bg-primary"
-        disabled={false}
-      />
-      <p className="text-xs mt-6 mb-16">
-        * Once you subscribe we will send you one automatic test-notification.
-        You can unsubscribe at any time.
-      </p>
-    </>
+      >
+        <img width={30} height={30} src="/favicon.svg" alt="" />
+      </div>
   )
 }
