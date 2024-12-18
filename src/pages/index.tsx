@@ -134,8 +134,8 @@ export default function Home() {
     }
   }, [state.status, info?.subscriptionState]);
 
-  const sendHello = async () => {
-    magicBell.sendNotificationCustom('🫂 Жене требуются объятия!');
+  const sendHello = (text: string) => {
+    magicBell.sendNotificationCustom(text);
   };
 
   return (
@@ -182,8 +182,10 @@ export default function Home() {
       </main>
       <Footer open={footerOpen} setOpen={setFooterOpen} />
 
-      <div className="px-4">
-      <button onClick={sendHello} className="btn btn-primary w-full text-white">🫂 Требуются объятия!</button>
+      <div className="px-4 flex flex-col gap-2">
+      <button onClick={() => sendHello("🫂 Требуются объятия!")} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
+      <button onClick={() => sendHello("😔 Приступ грусти")} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
+      <button onClick={() => sendHello("😋 Хочу кушать!")} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
       </div>
     </>
   );
