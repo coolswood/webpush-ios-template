@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useConfig, clientSettings } from "@magicbell/react-headless"
 import { prefetchConfig, registerServiceWorker } from "@magicbell/webpush"
 
 import subscriptionManager from "@/services/subscriptionManager"
+import Button from "@/components/button"
 import { State } from "@/pages"
 
 export default function Subscriber({
@@ -26,9 +27,17 @@ export default function Subscriber({
     } catch (e) {
       return { token: "", project: "", host }
     }
-  }, [config]);
+  }, [config])
 
-  const handleSubscribe = useCallback(async () => {
+  useEffect(() => {
+    if (!subscribeOptions.token) {
+      return
+    }
+    registerServiceWorker()
+    prefetchConfig(subscribeOptions)
+  }, [subscribeOptions])
+
+  const handleSubscribe = async () => {
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
@@ -39,22 +48,30 @@ export default function Subscriber({
     } catch (error: any) {
       setState({ status: "error", error: error.message })
     }
-  }, [setState, subscribeOptions])
+  }
 
-  useEffect(() => {
-    if (!subscribeOptions.token) {
-      return
-    }
-    registerServiceWorker()
-    prefetchConfig(subscribeOptions)
-  }, [handleSubscribe, subscribeOptions])
+  const isLoading = !subscribeOptions.token || state.status === "busy"
 
-  useEffect(() => {
-    if(state.status !== "success" && state.status !== "busy") {
-      handleSubscribe();
-    }
-  }, [handleSubscribe, state.status])
+  if (isLoading) {
+    return <Button text="Loading" classname="bg-gray-500" disabled={true} />
+  }
 
+  if (state.status === "error") {
+    return <Button text="Error" classname="bg-red-400" disabled={true} />
+  }
 
-  return null;
+  return (
+    <>
+      <Button
+        onClick={handleSubscribe}
+        text="Subscribe"
+        classname="bg-primary"
+        disabled={false}
+      />
+      <p className="text-xs mt-6 mb-16">
+        * Once you subscribe we will send you one automatic test-notification.
+        You can unsubscribe at any time.
+      </p>
+    </>
+  )
 }
