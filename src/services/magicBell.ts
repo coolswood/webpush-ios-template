@@ -44,6 +44,23 @@ class MagicBell {
     }
   }
 
+  public async sendNotificationCustom(title: string) {
+    const userId = this.getUserId()
+    if (!userId) {
+      return
+    }
+    const response = await fetch(`/api/custom`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, title }),
+    })
+    if (!response.ok) {
+      throw new Error(`Failed to send custom notification`)
+    }
+  }
+
   /**
    * Get the topics that the user is subscribed to
    */

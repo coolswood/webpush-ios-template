@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 interface HugsRequest extends NextApiRequest {
   body: {
     userId: string
+    title: string
   }
 }
 
@@ -21,7 +22,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>
 ) {
   await magicbell.notifications.create({
-    title: "😪 Жене требуются объятия!",
+    title: req.body.title,
     recipients: [{ external_id: req.body.userId }],
     category: "default",
   })

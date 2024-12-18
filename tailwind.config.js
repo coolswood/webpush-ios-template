@@ -7,6 +7,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
+  plugins: [
+    require('daisyui'),
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -24,5 +27,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 }

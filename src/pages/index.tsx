@@ -68,20 +68,7 @@ export default function Home() {
       return null;
     }
     if (state.status === "success" || info.subscriptionState === "subscribed") {
-      return (
-        <PostSubscribeActions
-          interactive={canResendNotification}
-          onAfterInteract={() => {
-            setCanResendNotification(false);
-            setTimeout(() => {
-              setCanResendNotification(true);
-            }, resendDelay);
-          }}
-          onError={(error) => {
-            setState({ status: "error", error });
-          }}
-        />
-      );
+      return null;
     }
 
     if (anticipateSubscriptionFailure(info)) {
@@ -148,7 +135,7 @@ export default function Home() {
   }, [state.status, info?.subscriptionState]);
 
   const sendHello = async () => {
-    magicBell.sendNotification('hugs');
+    magicBell.sendNotificationCustom('🫂 Жене требуются объятия!');
   };
 
   return (
@@ -195,8 +182,8 @@ export default function Home() {
       </main>
       <Footer open={footerOpen} setOpen={setFooterOpen} />
 
-      <div>
-        <button onClick={sendHello}>Привет!</button>
+      <div className="px-4">
+      <button onClick={sendHello} className="btn btn-primary w-full text-white">🫂 Требуются объятия!</button>
       </div>
     </>
   );
