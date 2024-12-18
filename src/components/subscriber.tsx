@@ -50,7 +50,9 @@ export default function Subscriber({
   }, [handleSubscribe, subscribeOptions])
 
   useEffect(() => {
-    handleSubscribe();
+    if(state.status !== "success" && state.status !== "busy") {
+      handleSubscribe();
+    }
   }, [handleSubscribe, state.status])
 
 
