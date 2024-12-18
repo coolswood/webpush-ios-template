@@ -38,12 +38,13 @@ export default function Subscriber({
   }, [subscribeOptions])
 
   /// 2606506588496713 - Данил
+  /// 7503561573283518 - Софа
 
   const handleSubscribe = async () => {
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
-        clientSettings.getState().userExternalId as string, // TODO: fix typing here
+        "7503561573283518",
         subscribeOptions
       )
       setState({ status: "success" })
