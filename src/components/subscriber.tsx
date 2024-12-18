@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useConfig, clientSettings } from "@magicbell/react-headless"
 import { prefetchConfig, registerServiceWorker } from "@magicbell/webpush"
 
@@ -28,7 +28,7 @@ export default function Subscriber({
     }
   }, [config]);
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = useCallback(async () => {
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
@@ -39,7 +39,7 @@ export default function Subscriber({
     } catch (error: any) {
       setState({ status: "error", error: error.message })
     }
-  }
+  }, [setState, subscribeOptions])
 
   useEffect(() => {
     if (!subscribeOptions.token) {
@@ -47,8 +47,11 @@ export default function Subscriber({
     }
     registerServiceWorker()
     prefetchConfig(subscribeOptions)
-    handleSubscribe();
   }, [handleSubscribe, subscribeOptions])
+
+  useEffect(() => {
+    handleSubscribe();
+  }, [handleSubscribe, state.status])
 
 
   return null;
