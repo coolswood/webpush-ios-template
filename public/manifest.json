@@ -1,10 +1,10 @@
 {
-  "name": "Любовь",
-  "short_name": "Любовь",
+  "name": "Семья",
+  "short_name": "Семья",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "orientation": "portrait-primary",
   "icons": [
     {

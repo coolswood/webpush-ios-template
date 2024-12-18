@@ -68,10 +68,6 @@ export default function Home() {
       return null;
     }
 
-    if(state.status === "idle")  {
-      return null;
-    }
-
     if (state.status === "success" || info.subscriptionState === "subscribed") {
       return null;
     }
@@ -143,7 +139,7 @@ export default function Home() {
     <>
       <header
         className={
-          "border-primary border-opacity-50 border-b-2 leading-8 text-lg font-bold text-gray-200 py-4 bg-section text-center " +
+          "border-primary border-opacity-50 border-b-2 leading-8 text-lg font-bold text-gray-200 py-4 bg-black text-center " +
           inter.className
         }
       >
