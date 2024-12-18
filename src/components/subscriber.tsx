@@ -37,6 +37,8 @@ export default function Subscriber({
     prefetchConfig(subscribeOptions)
   }, [subscribeOptions])
 
+  /// 2606506588496713 - Данил
+
   const handleSubscribe = async () => {
     try {
       setState({ status: "busy" })
@@ -53,11 +55,11 @@ export default function Subscriber({
   const isLoading = !subscribeOptions.token || state.status === "busy"
 
   if (isLoading) {
-    return <Button text="Loading" classname="bg-gray-500" disabled={true} />
+    return null;
   }
 
   if (state.status === "error") {
-    return <Button text="Error" classname="bg-red-400" disabled={true} />
+    return null;
   }
 
   return (
