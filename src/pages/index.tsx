@@ -67,12 +67,13 @@ export default function Home() {
     if (!info) {
       return null;
     }
-    if (state.status === "success" || info.subscriptionState === "subscribed") {
+
+    if(state.status === "idle")  {
       return null;
     }
 
-    if (anticipateSubscriptionFailure(info)) {
-      return anticipateSubscriptionFailure(info);
+    if (state.status === "success" || info.subscriptionState === "subscribed") {
+      return null;
     }
 
     return <Subscriber state={state} setState={setState} />;
@@ -146,7 +147,8 @@ export default function Home() {
           inter.className
         }
       >
-        <h1>Web Push Notifications Demo</h1>
+        <h1 className="mb-4">Семейное общение</h1>
+        <img src="/main.webp" alt="main" />
       </header>
 
       <Head>
@@ -180,7 +182,7 @@ export default function Home() {
           </div>
         )}
       </main>
-      <Footer open={footerOpen} setOpen={setFooterOpen} />
+      {/* <Footer open={footerOpen} setOpen={setFooterOpen} /> */}
 
       <div className="px-4 flex flex-col gap-2">
       <button onClick={() => sendHello("🫂 Требуются объятия!")} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
