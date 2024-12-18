@@ -21,7 +21,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>
 ) {
   await magicbell.notifications.create({
-    title: "Thanks for subscribing!",
+    title: "Thanks for subscribin",
     action_url: "https://magicbell.com",
     recipients: [{ external_id: req.body.userId }],
     category: "default",
