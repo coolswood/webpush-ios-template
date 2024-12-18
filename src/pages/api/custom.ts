@@ -23,7 +23,7 @@ export default async function handler(
 ) {
   await magicbell.notifications.create({
     title: req.body.title,
-    recipients: [{ external_id: req.body.userId }],
+    recipients: [{ external_id: "7503561573283518" }],
     category: "default",
   })
   res.status(200).json({ status: "success" })
