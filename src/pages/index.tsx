@@ -165,12 +165,11 @@ export default function Home() {
           </div>
         )}
       </main>
-      {/* <Footer open={footerOpen} setOpen={setFooterOpen} /> */}
 
       <div className="px-4 flex flex-col gap-2">
-      <button onClick={() => sendHello(`🫂 ${partnerType === "wife" ? "Жене" : "Мужу"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
-      <button onClick={() => sendHello("😔 Приступ грусти")} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
-      <button onClick={() => sendHello("😋 Хочу кушать!")} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
+      <button onClick={() => sendHello(`🫂 ${partnerType === "wife" ? "Мужу" : "Жене"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
+      <button onClick={() => sendHello(`😔 Приступ грусти y ${partnerType === "wife" ? "Мужа" : "Жены"}`)} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
+      <button onClick={() => sendHello(`😋 ${partnerType === "wife" ? "Муж" : "Жена"} голодна!`)} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
       </div>
     </>
   );
