@@ -1,10 +1,6 @@
 import { clientSettings } from "@magicbell/react-headless"
 import { topics } from "@/constants/topics"
-
-const partner = {
-  "2606506588496713": "3699643956136578",
-  "3699643956136578": "2606506588496713",
-};
+import { partner } from "@/constants"
 
 type TopicSubscription = {
   topic: string
@@ -59,7 +55,7 @@ class MagicBell {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: partner[userId] || userId, title }),
+      body: JSON.stringify({ userId: partner[userId].id || userId, title }),
     })
     if (!response.ok) {
       throw new Error(`Failed to send custom notification`)

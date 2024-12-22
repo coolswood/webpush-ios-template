@@ -3,21 +3,18 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import ContentWrapper from "@/components/content-wrapper";
-import Disclaimer, { magicBellHandle } from "@/components/disclaimer";
+import { magicBellHandle } from "@/components/disclaimer";
 import ErrorDiagnostics from "@/components/error-diagnostics";
-import Footer from "@/components/footer";
 import IosInstructionalStatic from "@/components/ios-instructional-static";
-import Links from "@/components/links";
-import PostSubscribeActions from "@/components/post-subscribe-actions";
-import SeoText from "@/components/seo-text";
 import Subscriber from "@/components/subscriber";
 import useDeviceInfo, { DeviceInfo } from "@/hooks/useDeviceInfo";
 import minVersionCheck from "@/utils/minVersionCheck";
 import magicBell from "@/services/magicBell";
+import { partner } from "@/constants";
+import { clientSettings } from "@magicbell/react-headless";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const resendDelay = 10 * 1000;
 const enableSuccessMessage = false;
 
 export type State =
@@ -26,8 +23,7 @@ export type State =
   | { status: "unsupported" };
 
 export default function Home() {
-  const [footerOpen, setFooterOpen] = useState(false);
-  const [canResendNotification, setCanResendNotification] = useState(false);
+  const [partnerType, setPartnerType] = useState("");
   const [state, setState] = useState<State>({ status: "idle" });
   const info = useDeviceInfo();
 
@@ -114,26 +110,17 @@ export default function Home() {
       );
     }
   }
-
-  useEffect(() => {
-    if (state.status === "error") {
-      setFooterOpen(true);
-    }
-  }, [state.status]);
-
-  useEffect(() => {
-    if (state.status === "success") {
-      setTimeout(() => {
-        setCanResendNotification(true);
-      }, resendDelay);
-    } else if (info?.subscriptionState === "subscribed") {
-      setCanResendNotification(true);
-    }
-  }, [state.status, info?.subscriptionState]);
-
   const sendHello = (text: string) => {
     magicBell.sendNotificationCustom(text);
   };
+
+  useEffect(() => {
+    const userId = clientSettings.getState().userExternalId as string;
+
+  const partnerName = partner[userId].type;
+
+  setPartnerType(partnerName);
+  }, []);
 
   return (
     <>
@@ -181,7 +168,7 @@ export default function Home() {
       {/* <Footer open={footerOpen} setOpen={setFooterOpen} /> */}
 
       <div className="px-4 flex flex-col gap-2">
-      <button onClick={() => sendHello("🫂 Требуются объятия!")} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
+      <button onClick={() => sendHello(`🫂 ${partnerType === "wife" ? "Жене" : "Мужу"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
       <button onClick={() => sendHello("😔 Приступ грусти")} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
       <button onClick={() => sendHello("😋 Хочу кушать!")} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
       </div>
