@@ -2,8 +2,8 @@ import { clientSettings } from "@magicbell/react-headless"
 import { topics } from "@/constants/topics"
 
 const partner = {
-  "2606506588496713": "2045794073282663",
-  "2045794073282663": "2606506588496713",
+  "2606506588496713": "3699643956136578",
+  "3699643956136578": "2606506588496713",
 };
 
 type TopicSubscription = {
