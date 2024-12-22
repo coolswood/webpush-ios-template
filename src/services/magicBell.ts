@@ -59,7 +59,7 @@ class MagicBell {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: '2045794073282663', title }),
+      body: JSON.stringify({ userId: "2606506588496713", title }),
     })
     if (!response.ok) {
       throw new Error(`Failed to send custom notification`)
