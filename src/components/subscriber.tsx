@@ -6,6 +6,11 @@ import subscriptionManager from "@/services/subscriptionManager"
 import Button from "@/components/button"
 import { State } from "@/pages"
 
+const partner = {
+  "2606506588496713": "2045794073282663",
+  "2045794073282663": "2606506588496713",
+};
+
 export default function Subscriber({
   state,
   setState,
@@ -38,13 +43,13 @@ export default function Subscriber({
   }, [subscribeOptions])
 
   /// 2606506588496713 - Данил
-  /// 7503561573283518 - Софа
+  /// 2045794073282663 - Софа
 
   const handleSubscribe = async () => {
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
-        clientSettings.getState().userExternalId as string, // TODO: fix typing here
+        partner[clientSettings.getState().userExternalId!],
         subscribeOptions
       )
       setState({ status: "success" })
