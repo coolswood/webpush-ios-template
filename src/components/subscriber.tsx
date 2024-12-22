@@ -49,7 +49,7 @@ export default function Subscriber({
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
-        partner[clientSettings.getState().userExternalId!],
+        "2045794073282663",
         subscribeOptions
       )
       setState({ status: "success" })
