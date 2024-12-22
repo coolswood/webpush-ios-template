@@ -6,11 +6,6 @@ import subscriptionManager from "@/services/subscriptionManager"
 import Button from "@/components/button"
 import { State } from "@/pages"
 
-const partner = {
-  "2606506588496713": "2045794073282663",
-  "2045794073282663": "2606506588496713",
-};
-
 export default function Subscriber({
   state,
   setState,
@@ -49,7 +44,7 @@ export default function Subscriber({
     try {
       setState({ status: "busy" })
       await subscriptionManager.subscribe(
-        "2045794073282663",
+        clientSettings.getState().userExternalId as string, // TODO: fix typing here
         subscribeOptions
       )
       setState({ status: "success" })
