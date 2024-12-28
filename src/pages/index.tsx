@@ -167,10 +167,13 @@ export default function Home() {
       </main>
 
       <div className="px-4 flex flex-col gap-2">
-      <button onClick={() => sendHello(`🫂 ${partnerType === "husband" ? "Мужу" : "Жене"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🫂 Требуются объятия!</button>
-      <button onClick={() => sendHello(`😔 Приступ грусти y ${partnerType === "husband" ? "мужа" : "жены"}`)} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
+      <button onClick={() => sendHello(`🤗 ${partnerType === "wife" ? "Мужу" : "Жене"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🤗 Требуются объятия!</button>
+      <button onClick={() => sendHello(`😔 Приступ грусти y ${partnerType === "wife" ? "мужа" : "жены"}`)} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
       <button onClick={() => sendHello(`😋 ${partnerType === "husband" ? "Муж" : "Жена"} голодна!`)} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
       <button onClick={() => sendHello(`🔍️ Где же ${partnerType === "husband" ? "муж" : "жена"}?`)} className="btn btn-neutral w-full text-white">🔍️ Где же тыыыы?</button>
+      <button onClick={() => sendHello(`🥶 ${partnerType === "wife" ? "Мужу" : "Жене"} холодно`)} className="btn btn-neutral w-full text-white">🥶 Мне холодно</button>
+      <button onClick={() => sendHello(`🥰 Люблю!`)} className="btn btn-neutral w-full text-white">🥰 Люблю!</button>
+      <button onClick={() => sendHello(`😓 ${partnerType === "wife" ? "Мужу" : "Жене"} плохо!`)} className="btn btn-neutral w-full text-white">😓 Мне плохо</button>
       </div>
     </>
   );
