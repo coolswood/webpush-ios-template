@@ -117,9 +117,11 @@ export default function Home() {
   useEffect(() => {
     const userId = clientSettings.getState().userExternalId as string;
 
-  const partnerName = partner[userId].type;
+  const partnerName = partner[userId]?.type;
 
-  setPartnerType(partnerName);
+  if(partnerName) {
+    setPartnerType(partnerName);
+  }
   }, []);
 
   return (
@@ -169,7 +171,7 @@ export default function Home() {
       <div className="px-4 flex flex-col gap-2">
       <button onClick={() => sendHello(`🤗 ${partnerType === "wife" ? "Мужу" : "Жене"} требуются объятия!`)} className="btn btn-neutral w-full text-white">🤗 Требуются объятия!</button>
       <button onClick={() => sendHello(`😔 Приступ грусти y ${partnerType === "wife" ? "мужа" : "жены"}`)} className="btn btn-neutral w-full text-white">😔 Приступ грусти</button>
-      <button onClick={() => sendHello(`😋 ${partnerType === "wife" ? "Муж" : "Жена"} голоден!`)} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
+      <button onClick={() => sendHello(`😋 ${partnerType === "wife" ? "Муж" : "Жена"} голод!`)} className="btn btn-neutral w-full text-white">😋 Хочу кушать!</button>
       <button onClick={() => sendHello(`🔍️ Где же ${partnerType === "husband" ? "муж" : "жена"}?`)} className="btn btn-neutral w-full text-white">🔍️ Где же тыыыы?</button>
       <button onClick={() => sendHello(`🥶 ${partnerType === "wife" ? "Мужу" : "Жене"} холодно`)} className="btn btn-neutral w-full text-white">🥶 Мне холодно</button>
       <button onClick={() => sendHello(`🥰 Люблю!`)} className="btn btn-neutral w-full text-white">🥰 Люблю!</button>
